@@ -1,0 +1,45 @@
+enum BurgerType {
+    case Beef
+    case Turkey
+    case Veggie
+}
+ 
+struct Burger {
+    var type: BurgerType
+    var price: Double
+}
+ 
+struct Menu {
+    var burgers: [Burger]
+ 
+    func displayMenu() {
+        print("Welcome to Bill's Gourmet Burger Bistro!")
+        print("Our Menu Below:")
+        for (index, burger) in burgers.enumerated() {
+            print("\(index + 1). \(burger.type) Burger - $\(burger.price)")
+        }
+    }
+ 
+    func selectBurger(at index: Int) -> Burger? {
+        if index >= 0 && index < burgers.count {
+            return burgers[index]
+        } else {
+            return nil
+        }
+    }
+}
+ 
+var beefBurger = Burger(type: .Beef, price: 14.99)
+var turkeyBurger = Burger(type: .Turkey, price: 13.99)
+var veggieBurger = Burger(type: .Veggie, price: 11.99)
+ 
+var menu = Menu(burgers: [beefBurger, turkeyBurger, veggieBurger])
+ 
+menu.displayMenu()
+ 
+if let selectedBurger = menu.selectBurger(at: 3) {
+    print("You selected: \(selectedBurger.type) Burger")
+    print("Price: $\(selectedBurger.price)")
+} else {
+    print("Invalid selection.")
+}
